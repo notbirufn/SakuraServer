@@ -1,0 +1,1 @@
+{ "maxRetryCount": 2, "retryInterval": 60, "retryJitter": 10, "failAction": "ABORT" }
