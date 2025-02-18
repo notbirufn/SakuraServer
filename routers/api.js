@@ -40,7 +40,6 @@ app.get("/content/api/pages/fortnite-game", (req, res) => {
         });
 });
 
-module.exports = app;
 
 
 
