@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express.Router();
-const crypto = require("crypto");
 const jsonwebtoken = require("jsonwebtoken");
+const crypto = require("crypto");
 
 app.post("/account/api/oauth/token", async (req, res) => {
     if (req.body.grant_type == "client_credentials" && req.body.token_type == "eg1") {
@@ -74,7 +74,9 @@ app.post("/account/api/oauth/token", async (req, res) => {
             "client_id": "ec684b8c687f479fadea3cb2ad83f5c6",
             "internal_client": true,
             "client_service": "prod-fn",
-            "scope": [ "basic_profile" ],
+            "scope": [
+                "basic_profile"
+            ],
             "displayName":  req.body.exchange_code || "SakuraPlayer",
             "app": "prod-fn",
             "in_app_id":  req.body.exchange_code || "SakuraPlayer",
