@@ -24,6 +24,7 @@ app.get("/party/api/v1/Fortnite/user/:account_id", async (req, res) => {
     });
 });
 
+// JSONのダンプをそのまま使用しているため、近いうちに修正する
 app.post("/party/api/v1/Fortnite/parties", async (req, res) => {
     console.log(req.body);
     res.json({
