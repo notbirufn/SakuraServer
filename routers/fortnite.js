@@ -42,10 +42,10 @@ app.get("/fortnite/api/discovery/accessToken/:branch_name", async (req, res) => 
 });
 
 
-const default_device_profiles_ini = path.join(__dirname, "../responses/cloudstorage/DefaultDeviceProfiles.ini");
-const default_engine_ini = path.join(__dirname, "../responses/cloudstorage/DefaultEngine.ini");
-const default_game_ini = path.join(__dirname, "../responses/cloudstorage/DefaultGame.ini");
-const default_runtime_options_ini = path.join(__dirname, "../responses/cloudstorage/DefaultRuntimeOptions.ini");
+const default_device_profiles_ini = path.join(__dirname, "../cloudstorage/DefaultDeviceProfiles.ini");
+const default_engine_ini = path.join(__dirname, "../cloudstorage/DefaultEngine.ini");
+const default_game_ini = path.join(__dirname, "../cloudstorage/DefaultGame.ini");
+const default_runtime_options_ini = path.join(__dirname, "../cloudstorage/DefaultRuntimeOptions.ini");
 
 app.get("/fortnite/api/cloudstorage/system/config", async (req, res) => {
     res.json({
