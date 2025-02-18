@@ -4,11 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const crypto = require("crypto");
 
-app.get("/fortnite/api/v2/versioncheck/Windows", async (req, res) => {
-    res.json({
-        "type": "NO_UPDATE"
-    });
-});
+
 
 app.get("/fortnite/api/cloudstorage/system/config", async (req, res) => {
     res.json({
