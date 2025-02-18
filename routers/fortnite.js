@@ -10,9 +10,46 @@ app.get("/fortnite/api/v2/versioncheck/Windows", async (req, res) => {
     });
 });
 
+app.get("/fortnite/api/game/v2/enabled_features", async (req, res) => {
+    res.json([]);
+});
+
+app.post("/fortnite/api/game/v2/profile/:account_id/client/:operation", async (req, res) => {
+    res.json([]);
+});
+
+app.get("/fortnite/api/storefront/v2/keychain", async (req, res) => {
+    const response = require("../responses/storefront/keychain.json");
+    res.json(response);
+});
+
+app.get("/fortnite/api/storefront/v2/catalog", async (req, res) => {
+    const response = require("../responses/storefront/catalog.json");
+    res.json(response);
+});
+
+app.get("/fortnite/api/calendar/v1/timeline", async (req, res) => {
+    const response = require("../responses/calendar/timeline.json");
+    res.json(response);
+});
+
+app.get("/fortnite/api/discovery/accessToken/:branch_name", async (req, res) => {
+    res.json({
+        "branchName": req.params.branch_name,
+        "appId": "Fortnite",
+        "token": "SakuraServer"
+    });
+});
+
+
+const default_device_profiles_ini = path.join(__dirname, "../responses/cloudstorage/DefaultDeviceProfiles.ini");
+const default_engine_ini = path.join(__dirname, "../responses/cloudstorage/DefaultEngine.ini");
+const default_game_ini = path.join(__dirname, "../responses/cloudstorage/DefaultGame.ini");
+const default_runtime_options_ini = path.join(__dirname, "../responses/cloudstorage/DefaultRuntimeOptions.ini");
+
 app.get("/fortnite/api/cloudstorage/system/config", async (req, res) => {
     res.json({
-        "lastUpdated": new Date().toISOString(),
+        "lastUpdated": "0001-01-01T00:00:00.000Z",
         "disableV2": true,
         "isAuthenticated": true,
         "enumerateFilesPath": "/api/cloudstorage/system",
@@ -53,11 +90,6 @@ app.get("/fortnite/api/cloudstorage/system/config", async (req, res) => {
         }
     });
 });
-
-const default_device_profiles_ini = path.join(__dirname, "../responses/cloudstorage/DefaultDeviceProfiles.ini");
-const default_engine_ini = path.join(__dirname, "../responses/cloudstorage/DefaultEngine.ini");
-const default_game_ini = path.join(__dirname, "../responses/cloudstorage/DefaultGame.ini");
-const default_runtime_options_ini = path.join(__dirname, "../responses/cloudstorage/DefaultRuntimeOptions.ini");
 
 app.get("/fortnite/api/cloudstorage/system", async (req, res) => {
     res.json([{
@@ -125,6 +157,58 @@ app.get("/fortnite/api/cloudstorage/system/DefaultGame.ini", async (req, res) =>
 app.get("/fortnite/api/cloudstorage/system/DefaultRuntimeOptions.ini", async (req, res) => {
     res.set("content-type", "application/octet-stream");
     res.sendFile(default_runtime_options_ini);
+});
+
+app.get("/fortnite/api/cloudstorage/user/config", async (req, res) => {
+    res.json({
+        "lastUpdated": "0001-01-01T00:00:00.000Z",
+        "disableV2": true,
+        "isAuthenticated": true,
+        "enumerateFilesPath": "/api/cloudstorage/user",
+        "enableMigration": false,
+        "enableWrites": true,
+        "epicAppName": "Live",
+        "transports": {
+            "McpProxyTransport": {
+                "name": "McpProxyTransport",
+                "type": "ProxyStreamingFile",
+                "appName": "fortnite",
+                "isEnabled": true,
+                "isRequired": true,
+                "isPrimary": true,
+                "timeoutSeconds": 30,
+                "priority": 10
+            },
+            "McpSignatoryTransport": {
+                "name": "McpSignatoryTransport",
+                "type": "ProxySignatory",
+                "appName": "fortnite",
+                "isEnabled": false,
+                "isRequired": false,
+                "isPrimary": false,
+                "timeoutSeconds": 30,
+                "priority": 20
+            },
+            "DssDirectTransport": {
+                "name": "DssDirectTransport",
+                "type": "DirectDss",
+                "appName": "fortnite",
+                "isEnabled": false,
+                "isRequired": false,
+                "isPrimary": false,
+                "timeoutSeconds": 30,
+                "priority": 30
+            }
+        }
+    });
+});
+
+app.get("/fortnite/api/cloudstorage/user/:account_id", async (req, res) => {
+    res.json([]);
+});
+
+app.put("/fortnite/api/cloudstorage/user/:account_id/ClientSettings.Sav", async (req, res) => {
+    res.status(204).end();
 });
 
 module.exports = app;
