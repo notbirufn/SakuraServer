@@ -29,8 +29,128 @@ app.get("/fortnite/api/storefront/v2/catalog", async (req, res) => {
 });
 
 app.get("/fortnite/api/calendar/v1/timeline", async (req, res) => {
-    const response = require("../responses/calendar/timeline.json");
-    res.json(response);
+    //const response = require("../responses/calendar/timeline.json");
+    //res.json(response);
+
+    const season = req.headers["user-agent"].split("++Fortnite+Release-")[1].split(".")[0];
+
+    res.json({
+        "channels" : {
+            "standalone-store" : {
+                "states" : [
+                    {
+                        "validFrom" : "0001-01-01T00:00:00.000Z",
+                        "activeEvents" : [],
+                        "state" : {
+                            "activePurchaseLimitingEventIds" : [],
+                            "storefront" : {},
+                            "rmtPromotionConfig" : [],
+                            "storeEnd" : "0001-01-01T00:00:00.000Z"
+                        }
+                    }
+                ],
+                "cacheExpire" : "9999-12-31T23:59:59.999Z"
+            },
+            "client-matchmaking" : {
+                "states" : [
+                    {
+                        "validFrom" : "0001-01-01T00:00:00.000Z",
+                        "activeEvents" : [],
+                        "state" : {
+                            "region" : {
+                                "ME" : {},
+                                "NAE" : {},
+                                "NAW" : {},
+                                "NAC" : {},
+                                "EU" : {},
+                                "BR" : {},
+                                "OCE" : {},
+                                "ASIA" : {}
+                            }
+                        }
+                    }
+                ],
+                "cacheExpire" : "9999-12-31T23:59:59.999Z"
+            },
+            "tk" : {
+                "states" : [
+                    {
+                        "validFrom" : "0001-01-01T00:00:00.000Z",
+                        "activeEvents" : [],
+                        "state" : {
+                            "k" : []
+                        }
+                    }
+                ],
+                "cacheExpire" : "9999-12-31T23:59:59.999Z"
+            },
+            "featured-islands" : {
+                "states" : [
+                    {
+                        "validFrom" : "0001-01-01T00:00:00.000Z",
+                        "activeEvents" : [],
+                        "state" : {
+                            "islandCodes" : [],
+                            "playlistCuratedContent" : {},
+                            "playlistCuratedHub" : {},
+                            "islandTemplates" : []
+                        }
+                    }
+                ],
+                "cacheExpire" : "9999-12-31T23:59:59.999Z"
+            },
+            "community-votes" : {
+                "states" : [
+                    {
+                        "validFrom" : "0001-01-01T00:00:00.000Z",
+                        "activeEvents" : [],
+                        "state" : {
+                            "electionId" : "",
+                            "candidates" : [],
+                            "electionEnds" : "9999-12-31T23:59:59.999Z",
+                            "numWinners" : 1
+                        }
+                    }
+                ],
+                "cacheExpire" : "9999-12-31T23:59:59.999Z"
+            },
+            "client-events" : {
+                "states" : [
+                    {
+                        "validFrom" : "0001-01-01T00:00:00.000Z",
+                        "activeEvents" : [
+                            {
+                                "eventType" : `EventFlag.LobbySeason${season}`,
+                                "activeUntil" : "9999-12-31T23:59:59.999Z",
+                                "activeSince" : "0001-01-01T00:00:00.000Z"
+                            }
+                        ],
+                        "state" : {
+                            "activeStorefronts" : [],
+                            "eventNamedWeights" : {},
+                            "activeEvents" : [],
+                            "seasonNumber" : Number(season),
+                            "seasonTemplateId" : `AthenaSeason:athenaseason${season}`,
+                            "matchXpBonusPoints" : 0,
+                            "eventPunchCardTemplateId" : "",
+                            "seasonBegin" : "0001-01-01T00:00:00.000Z",
+                            "seasonEnd" : "9999-12-31T23:59:59.999Z",
+                            "seasonDisplayedEnd" : "0001-01-01T00:00:00.000Z",
+                            "weeklyStoreEnd" : "0001-01-01T00:00:00.000Z",
+                            "stwEventStoreEnd" : "9999-12-31T23:59:59.999Z",
+                            "stwWeeklyStoreEnd" : "9999-12-31T23:59:59.999Z",
+                            "sectionStoreEnds" : {},
+                            "rmtPromotion" : "",
+                            "dailyStoreEnd" : "9999-12-31T23:59:59.999Z"
+                        }
+                    }
+                ],
+                "cacheExpire" : "9999-12-31T23:59:59.999Z"
+            }
+        },
+        "cacheIntervalMins" : 15.0,
+        "currentTime" : new Date().toISOString()
+    });
 });
 
 app.get("/fortnite/api/discovery/accessToken/:branch_name", async (req, res) => {
